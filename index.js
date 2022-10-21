@@ -1,56 +1,60 @@
-const productos = 
-{
-    id: 1, 
-    title: 'Not Chicken Mila (2u) x 220gr - NOTCO',
-    price: 465,
-    thumbnail: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/16517762160641-706a5fed60a0e0afd216521499878924-640-0.png'
-}
-
 
 class Contenedor {
-    #id
-    #title 
-    #price
-    #thumbnail
+    #producto
 
-    constructor(id) {
-        this.#id = parseInt (id);
-        this.#title = [];
-        this.#price = [];
-        this.#thumbnail = url; //?
-    }
-    
-    getId(id) {
-        return this.#id
+    constructor() {
+        this.#producto = [];
+
     }
 
-    save(title, price, url) {
+    save(id, title, price, thumbnail) {
         const objeto = {
+            id: parseInt(id),
             title: title, 
             price: price,
-            thumbnail: url
+            thumbnail: thumbnail
         }
-        this.#title.push(nombre)
+
+        this.#producto.push(objeto);
     }   
+        
+    getId(id) {
+        return this.#producto(id);
+    }
 
     getById(id) {
-        for (let i = 0; i < array.length; i++) //recibe id y lo busca
+        if (this.#producto.length > 0) {
+           return this.#producto.find(item => item.id === id);
+        }else {
+            return null;
+        }
     }
 
     getAll() {
         return
     }
 
-    deleteById() {
-        for (let i = 0; i < array.length; i++) //busca
-        productos.splice(); //borra
+    deleteById(id) {
+        this.#producto.find(item => item.id === id); //busca
+        this.#producto.splice(id); //borra??
         return
     }
 
     deleteAll(){
-        productos.splice();
+        this.#producto.splice();
     }
 
 }
 
-const producto2 = new Contenedor (2)//?
+const productos = new Contenedor (1, 'not chicken mila', 465, 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/16517762160641-706a5fed60a0e0afd216521499878924-640-0.png');
+
+productos.getId();
+
+// const productos = 
+// {
+//     id: 1, 
+//     title: 'Not Chicken Mila (2u) x 220gr - NOTCO',
+//     price: 465,
+//     thumbnail: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/16517762160641-706a5fed60a0e0afd216521499878924-640-0.png'
+// }
+
