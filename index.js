@@ -1,60 +1,78 @@
 
 class Contenedor {
-    #producto
+    #producto;
+    #file;
 
-    constructor() {
+    constructor(road) {
         this.#producto = [];
-
+        this.#file = road;
     }
 
-    save(id, title, price, thumbnail) {
+    async save(title, price, thumbnail) {
         const objeto = {
-            id: parseInt(id),
             title: title, 
-            price: price,
+            price: parseInt(price),
             thumbnail: thumbnail
+        };
+        try {
+            if (this.#producto.length === 0){
+                objeto.id === 1;
+                this.#producto.push(objeto);
+            }else {
+                objeto.id = this.#producto[this.#producto.length].id + 1;
+                this.#producto.push(objeto);
+            }
+            await fs.promises.writeFile(this.#road, JSON.stringify(this.#producto, null, '/t'))
         }
-
-        this.#producto.push(objeto);
     }   
         
-    getId(id) {
-        return this.#producto(id);
+    async getId(id) {
+
+        try {
+            return this.#producto.objeto(id);
+        }
+
     }
 
-    getById(id) {
-        if (this.#producto.length > 0) {
-           return this.#producto.find(item => item.id === id);
-        }else {
-            return null;
+    async getById(id) {
+
+        try {
+            if (this.#producto.length > 0) {
+                if (this.#producto.find(item => item.id === id)){
+                    console.log('el item encontrado es: ' )
+                    console.log (Contenedor(objeto))
+                } else if (this.#producto.find(item => item.id === id)) {
+                    console.log('Tal item no existe' )
+                }  
+            }else {
+                return null;
+            }
         }
     }
 
-    getAll() {
-        return
+    async getAll(objeto) {
+        try {
+            const newArray = objeto.filter(i => i > 0);
+            return newArray;
+        }
+
     }
 
-    deleteById(id) {
-        this.#producto.find(item => item.id === id); //busca
-        this.#producto.splice(id); //borra??
-        return
-    }
+    async deleteById(id) {
 
-    deleteAll(){
-        this.#producto.splice();
+        try {
+            this.#producto.splice(this.#producto.find(item => item.id === id)); 
+        }
+
+        }
+
+
+    async deleteAll(){
+        try {
+            this.#producto.splice();
+        }
     }
 
 }
 
 const productos = new Contenedor (1, 'not chicken mila', 465, 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/16517762160641-706a5fed60a0e0afd216521499878924-640-0.png');
-
-productos.getId();
-
-// const productos = 
-// {
-//     id: 1, 
-//     title: 'Not Chicken Mila (2u) x 220gr - NOTCO',
-//     price: 465,
-//     thumbnail: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/16517762160641-706a5fed60a0e0afd216521499878924-640-0.png'
-// }
-
